@@ -103,3 +103,8 @@ ul {
 .amenities:hover .popover {
     display: block;
 }
+
+.overflow{
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}

@@ -1,9 +1,10 @@
 $(document).ready(function () {
 
-  // status request
+  // status check-up
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/status/',
     type: 'GET',
+    dataType: 'json',
     contentType: 'application/json',
     success: function (status) {
       if (status.status === 'OK') {
@@ -11,41 +12,45 @@ $(document).ready(function () {
       } else {
         $('div#api_status').removeClass('available');
       }
-    },
-    error: function (status) {
-      $('div#api_status').removeClass('available');
     }
   });
 
-  // place request
+  // generates place articles
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     type: 'POST',
     contentType: 'application/json',
     data: '{}',
-    success: function (data) {
-    },
-    error: function (status) {
+    success: function (body) {
+      for (let p of body) {
+        $('section.places').append($('<article></article>').append(
+        $('<div class="price_by_night">').text('$' + p.price_by_night),
+	$('<h2></h2>').text(p.name),
+        $('<div class="informations"></div>').append(
+          $('<div class="max_guest"></div>').text(p.max_guest + ' Guests'),
+          $('<div class="number_rooms"></div>').text(p.number_rooms + ' Rooms'),
+            $('<div class="number_bathrooms"></div>').text(p.number_bathrooms + ' Bathrooms')),
+            $('<div class="description"></div>').html(p.description)));
+      }
     }
   });
 
-
-  let checkedList = []; // List to save checked elements
+let checkedObj = {}; // Object to save checked elements
 
   $('input[type="checkbox"]').change(function () {
 
     if (this.checked) {
-      checkedList.push($(this).attr('data-id'));
+      checkedObj[$(this).attr('data-id')] = $(this).attr('data-name');
     } else {
-      checkedList.pop($(this).attr('data-id'));
+      delete checkedObj[$(this).attr('data-id')];
     }
 
-    let aList = $('div.amenities h4');
-
-    if (checkedList.length === 0) {
-      aList.text('\u00A0'); // fill in the h4 tag with blank
+    if (Object.keys(checkedObj).length < 1) {
+      $('div.amenities h4').text('\u00A0'); // fill in the h4 tag with blank
     } else {
-      $('div.amenities h4').text(checkedList.join(', '));
+      // $('div.amenities h4').addClass('overflow'); // Handles text-overflow
+      // $('div.amenities h4').text(Object.values(checkedObj).join(', ')); // another way to print the values of the Object
+      $('div.amenities h4').text($.map(checkedObj, function (name) { return name; }).join(', '));
     }
 
   });
