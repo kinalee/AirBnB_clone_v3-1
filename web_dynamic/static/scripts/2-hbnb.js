@@ -1,19 +1,10 @@
 $(document).ready(function () {
 
-
-  $.ajax({
-    url: 'http://0.0.0.0:5001/api/v1/status/',
-    type: 'GET',
-    contentType: 'application/json',
-    success: function (status) {
-      if (status.status === 'ok') {
-        $('div#api_status').addClass('available');
-      } else {
-        $('div#api_status').removeClass('available');
-      }
-    },
-    error: function (status) {
-      $('div#api_status').removeClass('available');
+  $.getJSON('http://0.0.0.0:5001/api/v1/status/', function(body) {
+    if (body.status == "OK") {
+      $('div#api_status').addClass('available');
+    } else {
+      $('div#api_status').removeClass('avaialble');
     }
   });
 
@@ -36,5 +27,4 @@ $(document).ready(function () {
     }
 
   });
-
 });
