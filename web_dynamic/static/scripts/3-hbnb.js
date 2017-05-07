@@ -15,6 +15,7 @@ $(document).ready(function () {
     }
   });
 
+
   // generates place articles
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
@@ -23,19 +24,19 @@ $(document).ready(function () {
     data: '{}',
     success: function (body) {
       for (let p of body) {
-        $('section.places').append($('<article></article>').append(
+        $('section.places').append($('<article>').append(
         $('<div class="price_by_night">').text('$' + p.price_by_night),
-	$('<h2></h2>').text(p.name),
-        $('<div class="informations"></div>').append(
-          $('<div class="max_guest"></div>').text(p.max_guest + ' Guests'),
-          $('<div class="number_rooms"></div>').text(p.number_rooms + ' Rooms'),
-            $('<div class="number_bathrooms"></div>').text(p.number_bathrooms + ' Bathrooms')),
-            $('<div class="description"></div>').html(p.description)));
+	$('<h2>').text(p.name),
+        $('<div class="informations">').append(
+          $('<div class="max_guest">').text(p.max_guest + ' Guests'),
+          $('<div class="number_rooms">').text(p.number_rooms + ' Rooms'),
+            $('<div class="number_bathrooms">').text(p.number_bathrooms + ' Bathrooms')),
+            $('<div class="description">').text(p.description)));
       }
     }
   });
 
-let checkedObj = {}; // Object to save checked elements
+  let checkedObj = {}; // Object to save checked elements
 
   $('input[type="checkbox"]').change(function () {
 
