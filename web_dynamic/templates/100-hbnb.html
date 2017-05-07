@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../static/styles/8-places.css?{{cache_id}}" />
     <link rel="icon" type="image/png" href="../static/images/icon.png?{{cache_id}}" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../static/scripts/4-hbnb.js?{{cache_id}}"></script>
+    <script type="text/javascript" src="../static/scripts/100-hbnb.js?{{cache_id}}"></script>
     <title>AirBnB clone</title>
   </head>
   <body>
@@ -23,10 +23,13 @@
 	  <h4>&nbsp;</h4>
 	  <ul class="popover">
 	      {% for state in result|sort(attribute='name') %}
-                 <LI><h2>{{state.name}}</h2>
+                 <li>
+	         <input type="checkbox" class="state" data-id="{{state.id}}" data-name="{{state.name}}">
+		   <h2 style="display: inline-block; margin-left: 10px;">{{state.name}}</h2>
                     <UL class="small_list">
 		       {% for city in state.cities|sort(attribute='name') %}
-                         <LI>{{city.name}}</LI>
+                         <li>
+			   <input type="checkbox" class="city" style="margin-right: 10px;" data-id="{{city.id}}" data-name="{{city.name}}">{{city.name}}</li>
 		       {% endfor %}
                     </UL>
                  </LI>

@@ -56,14 +56,12 @@ h2, h3, h4 {
     padding-top: 15px;
     font-weight: 400;
     font-size: 14px;
-    line-height: 100%;
-}
-
-.amenities h4 {
+    line-height: 0%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin: -1px;
+    height: 100%;
+
 }
 
 ul {
