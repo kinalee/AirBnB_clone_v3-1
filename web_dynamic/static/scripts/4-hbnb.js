@@ -71,9 +71,9 @@ $(document).ready(function () {
 
   // --------------------------------------------------------------------
 
-  // Filters places when serch button is clicked
+  // Filters places when search button is clicked
   $('section.filters button').click(function () {
-    var obj = {};
+    let obj = {};
     if (checkedObj.length < 1) {
       obj = '{}';
     } else {
