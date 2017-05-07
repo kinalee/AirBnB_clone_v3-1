@@ -54,14 +54,15 @@ $(document).ready(function () {
       data: obj,
       success: function (data) {
         for (let p of data) {
-          $('section.places').append($('<article>').append(
-            $('<div class="price_by_night">').text('$' + p.price_by_night),
-            $('<h2>').text(p.name),
-            $('<div class="informations">').append(
-              $('<div class="max_guest">').text(p.max_guest + ' Guests'),
-              $('<div class="number_rooms">').text(p.number_rooms + ' Rooms'),
-              $('<div class="number_bathrooms">').text(p.number_bathrooms + ' Bathrooms')),
-            $('<div class="description">').text(p.description)));
+          $('section.places')
+            .append($('<article>')
+              .append($('<div class="price_by_night">').text('$' + p.price_by_night),
+                      $('<h2>').text(p.name),
+                      $('<div class="informations">')
+                .append($('<div class="max_guest">').text(p.max_guest + ' Guests'),
+                        $('<div class="number_rooms">').text(p.number_rooms + ' Rooms'),
+                        $('<div class="number_bathrooms">').text(p.number_bathrooms + ' Bathrooms')),
+                        $('<div class="description">').text(p.description)));
         }
       }
     });
@@ -76,13 +77,13 @@ $(document).ready(function () {
 
     if (Object.keys(amenityObj).length > 0) {
       console.log(amenityObj);
-      obj["amenities"] = Object.values(amenityObj);
+      obj['amenities'] = Object.values(amenityObj);
     }
     if (stateArray.length > 0) {
-      obj["states"] = stateArray;
+      obj['states'] = stateArray;
     }
     if (cityArray.length > 0) {
-      obj["cities"] = cityArray;
+      obj['cities'] = cityArray;
     }
     placeGenerator(JSON.stringify(obj));
   });
@@ -110,7 +111,7 @@ $(document).ready(function () {
         cityArray.pop($(this).attr('data-id'));
       }
     }
-    if(Object.keys(locationObj).length < 1) {
+    if (Object.keys(locationObj).length < 1) {
       $('div.locations h4').text('\u00A0');
     } else {
       $('div.locations h4').text(Object.keys(locationObj).join(', '));
