@@ -1,6 +1,5 @@
 $(document).ready(function () {
-
-  // Listen for changes on each INPUT checkbox tag
+  // Listens for changes on each INPUT checkbox tag
   let checkedObj = {}; // Object to save checked elements
 
   $('input[type="checkbox"]').change(function () {
@@ -12,14 +11,18 @@ $(document).ready(function () {
 
     if (Object.keys(checkedObj).length < 1) {
       $('div.amenities h4').text('\u00A0'); // fill in the h4 tag with blank
+      // optional
+      // $('div.amenities h4').html('&nbsp;');
     } else {
-      // $('div.amenities h4').addClass('overflow'); // Handles text-overflow
       $('div.amenities h4').text(Object.keys(checkedObj).join(', '));
+      // optional
       // $('div.amenities h4').text($.map(checkedObj, function (name) { return name; }).join(', '));
+
+      // $('div.amenities h4').addClass('overflow'); // Handles text-overflow
     }
   });
 
- //--------------------------------------------------------------------
+  // --------------------------------------------------------------------
 
   // status check-up
   $.ajax({
@@ -36,7 +39,7 @@ $(document).ready(function () {
     }
   });
 
- //--------------------------------------------------------------------
+  // --------------------------------------------------------------------
 
   // generates place articles
   function placeGenerator (obj) {
@@ -45,7 +48,6 @@ $(document).ready(function () {
     }
     $('section.places').empty();
     $('section.places').append($('<h1>').text('Places'));
-    console.log(obj);
     $.ajax({
       url: 'http://0.0.0.0:5001/api/v1/places_search/',
       type: 'POST',
@@ -63,21 +65,20 @@ $(document).ready(function () {
             $('<div class="description">').text(p.description)));
         }
       }
-    })
-  };
+    });
+  }
   placeGenerator();
 
- //--------------------------------------------------------------------
+  // --------------------------------------------------------------------
 
   // Filters places when serch button is clicked
   $('section.filters button').click(function () {
-    obj = {};
+    var obj = {};
     if (checkedObj.length < 1) {
-      obj = '{}'
+      obj = '{}';
     } else {
       obj = JSON.stringify({'amenities': Object.values(checkedObj)});
     }
     placeGenerator(obj);
-  })
-
+  });
 });
