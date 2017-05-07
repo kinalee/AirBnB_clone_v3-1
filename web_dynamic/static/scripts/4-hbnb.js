@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  // Listen for changes on each INPUT checkbox tag
+  // Listens for changes on each INPUT checkbox tag
   let checkedObj = {}; // Object to save checked elements
 
   $('input[type="checkbox"]').change(function () {
