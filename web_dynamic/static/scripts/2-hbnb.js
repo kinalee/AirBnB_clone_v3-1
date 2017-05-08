@@ -5,8 +5,8 @@ $(document).ready(function () {
     type: 'GET',
     dataType: 'json',
     contentType: 'application/json',
-    success: function (status) {
-      if (status.status === 'OK') {
+    success: function (response) {
+      if (response === 'success') {
         $('div#api_status').addClass('available');
       } else {
         $('div#api_status').removeClass('available');
